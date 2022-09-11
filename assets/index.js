@@ -1,4 +1,13 @@
 /**
+ * Returns file basename
+ * @param {*} path
+ * @returns
+ */
+String.prototype.base = function() {
+    return this.split('/').reverse()[0];
+}
+
+/**
  * Activate preview image veiwer.
  * @param {EventListenerOrEventListenerObject} event
  * @returns {void}
@@ -23,12 +32,38 @@ async function activeModal(event) {
 }
 
 /**
- * @param {String} svgPath
- * @return {String} SVG element as string.
+ *
+ * @param {String} svg
+ * @return {String} Fixed svg text
  */
-function svgCommands(svgPath) {
-    // ([a-zA-Z])(-?\d*\.?\d*),?(-?\d*\.?\d*)(-|\d|\.|,)*
+async function svgFixDisconnected(svg) {
+    const d = svg.match(/(?<=d\=\").*(?=")/g).join(''); // Extract path
+    const absolute = new SVGPathCommander(d).toAbsolute().toString(); // Convert path to absolute
+    const fix = absolute.replace(/(?<=.)(?=M)/g, 'Z'); // Close all open subpathes.
+    const fixedSvg = svg.replace(/(?<=d\=\").*(?=")/g, fix); // Replace back fixed path to svg.
+    return fixedSvg; // Return fixed svg.
+}
 
+/**
+ * @param {*} src Image src want to fix.
+ */
+async function fixIcon(src) {
+    const svgText = await fetch(src).then(response => response.text());
+    const fixedSvgText = await svgFixDisconnected(svgText);
+    const base = src.base(src);
+
+    fetch('crud.php', {
+        method: 'POST',
+        body: JSON.stringify({ // Overwrite exiting file.
+            op: "add",
+            name: base,
+            content: fixedSvgText
+        })
+    }).then(res => res.json())
+      .then(json => {
+        if(json.success == true)
+            location.reload();
+    });
 }
 
 /**
@@ -102,6 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const glyphs = document.querySelectorAll("#unicode-table img");
     const tooltips = document.querySelectorAll("#unicode-table i");
+    const fixes = document.querySelectorAll("b.fix");
 
     const vguide = document.querySelector("#modal .vguide");
     const hguide = document.querySelector("#modal .hguide");
@@ -111,6 +147,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     for (const glyph of glyphs) {
         glyph.addEventListener("click", activeModal);
+    }
+
+    for (const fix of fixes) {
+        fix.addEventListener("click", e => {
+            const src = e.target.previousSibling?.src;
+            fixIcon(src);
+        });
     }
 
     for(const emptyCell of emptyCells) {

@@ -20,6 +20,7 @@ body {
     width: 100%;
 }
 .grid > .row > .col > img { cursor: zoom-in; }
+/**/
 .grid > .row > .col > b {
     width: inherit;
     margin: 0 5px;
@@ -31,6 +32,18 @@ body {
     background-color: #56a2dd;
 }
 .grid > .row > .col:hover > b { background-color: #3dcfa8; }
+/* fix button */
+.grid > .row > .col > b.fix {
+    right: -5px; top: 5px;
+    display: block;
+    position: absolute;
+    max-width: 10px;
+    height: 17px;
+    background-color: #868686;
+    z-index: 99;
+}
+.grid > .row > .col > b.fix:hover { background-color: #fd8310; }
+/**/
 .grid .vguide,
 .grid .hguide,
 .grid div.row::before,

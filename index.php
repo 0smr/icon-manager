@@ -2,6 +2,7 @@
 <head>
     <title>Glyph Viewer</title>
     <link rel="stylesheet" href="assets/index.css">
+    <script src="https://cdn.jsdelivr.net/npm/svg-path-commander/dist/svg-path-commander.min.js"></script>
     <script src="assets/index.js"></script>
 </head>
 <body>
@@ -55,7 +56,7 @@ if($userPath && is_dir($userPath)) {
                 foreach($cols as $ckey => $icon) {
                     if($icon) {
                         $base = pathinfo($icon, PATHINFO_FILENAME);
-                        echo "<div class='col'><img src='$icon' alt='$base'><i>$base</i></div>";
+                        echo "<div class='col'><img src='$icon' alt='$base'><b class='fix'>F</b><i>$base</i></div>";
                     } else {
                         $hex = dechex($ckey);
                         echo "<div class='col'><b class='add'>$rkey$hex</b></div>";
