@@ -60,7 +60,7 @@ if __name__ == '__main__':
         fileInfo = separator(file) # Extract data from the filename
         glyph = sfdFont.createChar(fileInfo['code'], fileInfo['name']) # Create glyph.
         glyph.importOutlines(file) # Import svg outline.
-        glyph.round(3) # Round glyph width factor 3
+        # glyph.round(3) # Round glyph width factor 3
         print('a.{0}-{1}'.format(fileInfo['code'], fileInfo['name']))
 
     # End glyphs update

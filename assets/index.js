@@ -37,10 +37,10 @@ async function activeModal(event) {
  * @return {String} Fixed svg text
  */
 async function svgFixDisconnected(svg) {
-    const d = svg.match(/(?<=d\=\").*(?=")/g).join(''); // Extract path
+    const d = svg.match(/(?<= d\=\").*(?=")/g).join(''); // Extract path
     const absolute = new SVGPathCommander(d).toAbsolute().toString(); // Convert path to absolute
     const fix = absolute.replace(/(?<=.)(?=M)/g, 'Z'); // Close all open subpathes.
-    const fixedSvg = svg.replace(/(?<=d\=\").*(?=")/g, fix); // Replace back fixed path to svg.
+    const fixedSvg = svg.replace(d, fix); // Replace back fixed path to svg.
     return fixedSvg; // Return fixed svg.
 }
 
