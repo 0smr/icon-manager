@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <head>
     <title>Glyph Viewer</title>
-    <link rel="stylesheet" href="assets/index.css">
     <script src="https://cdn.jsdelivr.net/npm/svg-path-commander/dist/svg-path-commander.min.js"></script>
     <script src="assets/index.js"></script>
+
+    <link rel="stylesheet" href="assets/index.css">
 </head>
 <body>
 <?php

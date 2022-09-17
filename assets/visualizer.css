@@ -1,0 +1,25 @@
+body { margin: 25px 100px;}
+textarea { width: 100%; resize: vertical; outline: none; }
+#preview { font-family: 'Courier New', Courier, monospace; font-size: 11pt; }
+#preview>b {
+    padding: 0 2px;
+    position: relative;
+    background-color: #03a9f41c;
+    border: 1px solid #2196F3;
+    border-radius: 2px;
+}
+
+#preview>b.ne {
+    background-color: #e91e6317;
+    border: 1px solid #F44336;
+    color: #9E9E9E;
+}
+
+#preview>b>i, #preview>b>img { position: absolute; }
+#preview>b>img:not([src=""]) {
+    bottom: 17px; left: 0;
+    margin: 0 -1px;
+    background-color: #00000045;
+    border: 1px solid #2196F3;
+    border-radius: 5px 5px 0 0;
+}
