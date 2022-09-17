@@ -3,10 +3,10 @@
 The icon **manager** is used to *build* and *manage* SVG icons as well as a custom font using the `fontforge` python module.
 
 ### Preview
-<center>
-    <img src="assets/preview.webp" width="400px"><br>
-    <i>Icon manager at browser</i>
-</center>
+<div align="center">
+    <img src="assets/preview.webp" width="400px"><br/>
+    <i>Icon manager view</i>
+</div>
 
 ### Requirements
 
