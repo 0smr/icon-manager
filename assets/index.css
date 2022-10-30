@@ -20,6 +20,7 @@ body {
     width: 100%;
 }
 .grid > .row > .col > img { cursor: zoom-in; }
+.grid div.col.def img { border: 2px solid #fd86105e; }
 /**/
 .grid > .row > .col > b {
     width: inherit;

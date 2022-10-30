@@ -39,6 +39,8 @@ if($userPath && is_dir($userPath)) {
     initializeTable(scandir($userPath), $userPath, $iconTable);
 }
 
+ksort($iconTable);
+
 ?>
     <div id="unicode-table">
         <div class="head">
@@ -56,8 +58,9 @@ if($userPath && is_dir($userPath)) {
                 echo "<div class='row'>";
                 foreach($cols as $ckey => $icon) {
                     if($icon) {
+						$isDef = strpos($icon, "default-svg") !== false ? " def" : "";
                         $base = pathinfo($icon, PATHINFO_FILENAME);
-                        echo "<div class='col'><img src='$icon' alt='$base'><b class='fix'>F</b><i>$base</i></div>";
+                        echo "<div class='col$isDef'><img src='$icon' alt='$base'><b class='fix'>F</b><i>$base</i></div>";
                     } else {
                         $hex = dechex($ckey);
                         echo "<div class='col'><b class='add'>$rkey$hex</b></div>";
