@@ -1,10 +1,13 @@
 #!/bin/bash
-# Open local server using default browser.
-if command -v xdg-open &> /dev/null # If linux or wsl.
+# Open local server using default browser
+if [[ -n "$IS_WSL" || -n "$WSL_DISTRO_NAME" ]] # If wsl
 then
-    xdg-open http://127.0.0.1:8000/icon-manager/index.php
-else # Otherwise maybe it's on windows.
-    start http://127.0.0.1:8000/icon-manager/index.php
+	cmd.exe /c start http://127.0.0.1:800/icon-manager/index.php
+elif command -v xdg-open &> /dev/null # If linux
+then
+    xdg-open http://127.0.0.1:800/icon-manager/index.php
+else # If windows msys
+    start http://127.0.0.1:800/icon-manager/index.php
 fi
 cp -n sample.conf ../manager.conf
-php -S localhost:8000 -t ../.
+php -S localhost:800 -t ../.
