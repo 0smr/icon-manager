@@ -39,7 +39,8 @@ async function activeModal(event) {
 async function svgFixDisconnected(svg) {
     const d = svg.match(/(?<= d\=\").*(?=")/g).join(''); // Extract path
     const absolute = new SVGPathCommander(d).toAbsolute().toString(); // Convert path to absolute
-    const fix = absolute.replace(/(?<=.)(?=M)/g, 'Z'); // Close all open subpathes.
+    let fix = absolute.replace(/(?<=.)(?=M)/g, 'Z'); // Close all open subpathes.
+    fix += fix.endsWith("z") || fix.endsWith("Z")? "" : "Z";
     const fixedSvg = svg.replace(d, fix); // Replace back fixed path to svg.
     return fixedSvg; // Return fixed svg.
 }
@@ -124,7 +125,7 @@ async function addNewIcon(code) {
     }).then(res => res.json())
       .then(json => {
         alert(json.success ? "Font generated" : "Error occured");
-        alert(json.message);
+        alert(json.message.join("\n"));
         parentElement.classList.remove("progress");
     });
 }

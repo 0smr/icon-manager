@@ -94,7 +94,9 @@ img { margin: 0; padding: 0; }
 .head label:hover { opacity: 0.9; }
 .head label:active { opacity: 0.8; }
 .head label.button.progress::after {
-    content: url('half-circle.svg');
+    content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'\
+                  id='mdi-abacus' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12'\
+                  r='10' stroke='white' fill='none' stroke-width='2' stroke-dasharray='30 15'/%3E%3C/svg%3E");
     color: white;
     width: 13px; height: 13px;
     display: inline-block;
