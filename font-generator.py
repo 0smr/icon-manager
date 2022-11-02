@@ -55,20 +55,19 @@ if __name__ == '__main__':
     sfdFont.selection.all()
     sfdFont.clear()
 
+    sfdFont.ascent = 20
+    sfdFont.descent = 4
     # Start glyphs insertion
     for file in svgFiles:
         fileInfo = separator(file) # Extract data from the filename
         glyph = sfdFont.createChar(fileInfo['code'], fileInfo['name']) # Create glyph.
-        glyph.importOutlines(file) # Import svg outline.
-        # glyph.round(3) # Round glyph width factor 3
-        print('a.{0}-{1}'.format(fileInfo['code'], fileInfo['name']))
+        glyph.importOutlines(file, scale=False) # Import svg outline.
+        glyph.width = 24
+        glyph.round(2)
+        print('a.{0}-{1}'.format(hex(fileInfo['code'])[2:], fileInfo['name']))
 
     # End glyphs update
-
-    # Set auto width for all glyphs
-    sfdFont.selection.all()
-    sfdFont.autoWidth(5)
-
+    sfdFont.familyname = fontName
     sfdFont.save() # Save sfd file.
 
     baseName = (sfdFont.default_base_filename or fontName) + '.ttf'
