@@ -63,11 +63,14 @@ if __name__ == '__main__':
         glyph = sfdFont.createChar(fileInfo['code'], fileInfo['name']) # Create glyph.
         glyph.importOutlines(file, scale=False) # Import svg outline.
         glyph.width = 24
-        glyph.round(2)
+        # glyph.round(3)
+        glyph.correctDirection()
         print('a.{0}-{1}'.format(hex(fileInfo['code'])[2:], fileInfo['name']))
 
     # End glyphs update
     sfdFont.familyname = fontName
+    sfdFont.fontname = fontName
+    sfdFont.fullname = fontName
     sfdFont.save() # Save sfd file.
 
     baseName = (sfdFont.default_base_filename or fontName) + '.ttf'
