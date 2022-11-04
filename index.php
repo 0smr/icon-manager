@@ -19,7 +19,7 @@ function initializeTable(array $iconList, $rootPath, &$table) {
             $row = substr($file,0,3); // 3 letter icon row "xxx".
             $col = hexdec($file[3]);  // Icon column a number from 0 to 16.
 
-            $table[$row] ??= array_fill(0,15,"");
+            $table[$row] ??= array_fill(0,16,"");
             $table[$row][$col] = $rootPath.$file;
         }
     }
