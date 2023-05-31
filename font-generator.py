@@ -47,7 +47,6 @@ if __name__ == '__main__':
         sfdFont.fontname = fontName
         sfdFont.save(sfdFilePath)
 
-
     # If git was available, set the font version.
     sfdFont.version = getAppVersion() or sfdFont.version
 
@@ -55,16 +54,19 @@ if __name__ == '__main__':
     sfdFont.selection.all()
     sfdFont.clear()
 
-    sfdFont.ascent = 20
-    sfdFont.descent = 4
+    sfdFont.em = 1024
+    # sfdFont.ascent = 20
+    # sfdFont.descent = 4
     # Start glyphs insertion
     for file in svgFiles:
         fileInfo = separator(file) # Extract data from the filename
         glyph = sfdFont.createChar(fileInfo['code'], fileInfo['name']) # Create glyph.
-        glyph.importOutlines(file, scale=False) # Import svg outline.
-        glyph.width = 24
+        glyph.importOutlines(file, scale=True) # Import svg outline.
+        glyph.width = 1024
         # glyph.round(3)
         glyph.correctDirection()
+        glyph.simplify()
+        glyph.round()
         print('a.{0}-{1}'.format(hex(fileInfo['code'])[2:], fileInfo['name']))
 
     # End glyphs update
